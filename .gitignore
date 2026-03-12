@@ -1,0 +1,25 @@
+# Private - do not share with candidates
+ANSWER_KEY.md
+CANDIDATE_TASK.md
+setup.sh
+
+# Python
+backend/venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node
+frontend/node_modules/
+# ingnore .env file
+.env
+
+# Generated data
+scripts/leads_100k.csv
+
+# OS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/

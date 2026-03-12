@@ -1,0 +1,21 @@
+LeadID,Agent,Source,Status,Revenue,CreatedAt
+2,Michael Chen,LinkedIn,Converted,12000.00,2024-01-16 09:15:00
+3,Elena Rodriguez,Referral,Pending,0.00,2024-01-16 11:45:00
+4,David Smith,Organic Search,Lost,0.00,2024-01-17 14:20:00
+5,Sarah Johnson,Webinar,Converted,8500.00,2024-01-18 16:10:00
+6,Kevin Park,Cold Call,Contacted,0.00,2024-01-19 10:05:00
+7,Elena Rodriguez,Google Ads,Converted,22000.00,2024-01-20 13:30:00
+8,Michael Chen,Facebook Ads,Pending,0.00,2024-01-21 08:45:00
+9,Sarah Johnson,LinkedIn,Converted,14200.00,2024-01-22 15:55:00
+10,David Smith,Referral,Converted,9800.00,2024-01-23 11:20:00
+11,Kevin Park,Organic Search,Contacted,0.00,2024-01-24 09:10:00
+12,Elena Rodriguez,Webinar,Lost,0.00,2024-01-25 17:40:00
+13,Michael Chen,Google Ads,Converted,18500.00,2024-01-26 12:00:00
+14,Sarah Johnson,Cold Call,Pending,0.00,2024-01-27 10:30:00
+15,David Smith,LinkedIn,Converted,11000.00,2024-01-28 14:15:00
+16,Kevin Park,Referral,Converted,7500.00,2024-01-29 16:50:00
+17,Elena Rodriguez,Organic Search,Contacted,0.00,2024-01-30 11:05:00
+18,Michael Chen,Facebook Ads,Lost,0.00,2024-01-31 09:45:00
+19,Sarah Johnson,Google Ads,Converted,25000.00,2024-02-01 13:20:00
+20,David Smith,Webinar,Pending,0.00,2024-02-02 15:10:00
+21,Kevin Park,LinkedIn,Converted,13400.00,2024-02-03 10:00:00
