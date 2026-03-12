@@ -36,8 +36,11 @@ API docs at `http://localhost:8001/docs`
 
 ### Frontend
 
+create .env file and place REACT_APP_API_BASE with value set to you server end point
+
 ```bash
 cd frontend
+nano .env
 npm install
 npm start
 ```
@@ -54,19 +57,23 @@ curl -X POST "http://localhost:8001/api/upload-csv" -F "file=@leads_100k.csv"
 
 ## API Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/api/analytics` | Dashboard metrics |
-| GET | `/api/analytics/leads-by-source` | Leads grouped by source |
-| GET | `/api/analytics/top-agents` | Top performing agents |
-| GET | `/api/leads` | All leads |
-| POST | `/api/upload-csv` | Upload CSV lead data |
+| Method | Endpoint                         | Description             |
+| ------ | -------------------------------- | ----------------------- |
+| GET    | `/api/analytics`                 | Dashboard metrics       |
+| GET    | `/api/analytics/leads-by-source` | Leads grouped by source |
+| GET    | `/api/analytics/top-agents`      | Top performing agents   |
+| GET    | `/api/leads`                     | All leads               |
+| POST   | `/api/upload-csv`                | Upload CSV lead data    |
+| GET    | `/api/agents/workload`           | Agents Data             |
+| GET    | `/api/agents/{agent_id}/leads`   | Single agent leads Data |
+| GET    | `/api/leads/{lead_id}/status`    | Update Lead Status      |
+| GET    | `/api/agents/{agent_id}`         | get single agent data   |
 
 ## CSV Format
 
 ```csv
-LeadID,Agent,Source,Status,Revenue,CreatedAt
-1,Sarah Johnson,Google Ads,Converted,15000.00,2024-01-15 10:30:00
+LeadID,Source,Status,Revenue,CreatedAt
+1,Google Ads,Converted,15000.00,2024-01-15 10:30:00
 ```
 
 Valid statuses: `New`, `Contacted`, `Qualified`, `Converted`, `Lost`

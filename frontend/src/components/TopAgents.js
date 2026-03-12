@@ -19,7 +19,7 @@ function TopAgents({ agents }) {
           </tr>
         </thead>
         <tbody>
-          {agents.map((agent, index) => (
+          {(agents) ? agents.map((agent, index) => (
             <tr key={index} style={{ borderBottom: '1px solid #eee' }}>
               <td style={{ padding: '8px' }}>{agent.agent_name}</td>
               <td style={{ textAlign: 'right', padding: '8px' }}>{agent.total_leads}</td>
@@ -28,7 +28,11 @@ function TopAgents({ agents }) {
                 ${Number(agent.revenue).toFixed(2)}
               </td>
             </tr>
-          ))}
+          )) : (
+            <div>
+              <p style={{ textAlign: 'start', padding: '20px', color: '#777', width: '100%' }}>No data available</p>
+            </div>
+          )}
         </tbody>
       </table>
     </div>
