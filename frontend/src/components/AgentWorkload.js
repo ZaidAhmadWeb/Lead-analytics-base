@@ -10,7 +10,6 @@ const AgentWorkload = ({ onSelectAgent }) => {
 
     const fetchWorkload = async () => {
         try {
-            // Using your required API base structure
             const response = await axios.get(`${API_BASE}/agents/workload`);
             setAgents(response.data);
             setLoading(false);
@@ -23,79 +22,76 @@ const AgentWorkload = ({ onSelectAgent }) => {
     };
 
     useEffect(() => {
-        // Initial fetch
         fetchWorkload();
-
-        // PART 3 REQUIREMENT: "Must update live"
-        // Set up an interval to refresh data every 5 seconds
         const interval = setInterval(fetchWorkload, 5000);
-
-        // Cleanup interval on component unmount
         return () => clearInterval(interval);
     }, []);
 
-    if (loading && agents.length === 0) return <div>Loading Workload...</div>;
-    if (error) return <div style={{ color: 'red' }}>{error}</div>;
+    if (loading && agents.length === 0) {
+        return (
+            <div className="flex items-center justify-center p-10 text-gray-500 animate-pulse">
+                Loading Workload...
+            </div>
+        );
+    }
+
+    if (error) {
+        return (
+            <div className="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 border border-red-200">
+                <span className="font-medium">Error:</span> {error}
+            </div>
+        );
+    }
 
     return (
-        <div className="workload-panel">
-            <h2>Agent Management</h2>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gap: '15px' }}>
-                {agents.map(agent => (
-                    <div key={agent.id} style={cardStyle(agent.open_count)}>
-                        <h4>{agent.name}</h4>
-                        <p>{agent.open_count} / 10 Active Leads</p>
+        <div className="p-6 bg-gray-50 min-h-screen">
+            <header className="mb-8">
+                <h2 className="text-2xl font-bold text-gray-800 tracking-tight">Agent Management</h2>
+                <p className="text-gray-500 text-sm">Real-time capacity monitoring</p>
+            </header>
 
-                        {/* New Button to trigger the detail view */}
-                        <button
-                            onClick={() => onSelectAgent(agent)}
-                            style={buttonStyle}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                {agents.map((agent) => {
+                    const isOverloaded = agent.open_count >= 10;
+                    const progressWidth = Math.min((agent.open_count / 10) * 100, 100);
+
+                    return (
+                        <div
+                            key={agent.id}
+                            className={`relative bg-white p-5 rounded-xl shadow-sm border-l-4 transition-all hover:shadow-md hover:-translate-y-1 ${isOverloaded ? 'border-red-500' : 'border-emerald-500'
+                                }`}
                         >
-                            Manage Leads
-                        </button>
+                            <div className="flex justify-between items-start mb-4">
+                                <div>
+                                    <h4 className="font-bold text-gray-900 text-lg">{agent.name}</h4>
+                                    <p className="text-sm font-medium text-gray-500">
+                                        {agent.open_count} <span className="text-gray-400">/ 10 Active Leads</span>
+                                    </p>
+                                </div>
+                                <span className={`flex h-3 w-3 rounded-full ${isOverloaded ? 'bg-red-500 animate-pulse' : 'bg-emerald-500'}`}></span>
+                            </div>
 
-                        <div style={progressContainer}>
-                            <div style={progressFill(agent.open_count)}></div>
+                            <button
+                                onClick={() => onSelectAgent(agent)}
+                                className="w-full mb-4 py-2 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
+                            >
+                                Manage Leads
+                            </button>
+
+                            {/* Progress Bar */}
+                            <div className="w-full bg-gray-100 rounded-full h-2.5 overflow-hidden">
+                                <div
+                                    className={`h-full transition-all duration-500 ease-out ${isOverloaded ? 'bg-red-500' : 'bg-emerald-500'
+                                        }`}
+                                    style={{ width: `${progressWidth}%` }}
+                                ></div>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );
 };
-
-const buttonStyle = {
-    backgroundColor: '#3498db',
-    color: 'white',
-    border: 'none',
-    padding: '8px 12px',
-    borderRadius: '4px',
-    cursor: 'pointer',
-    marginTop: '10px'
-};
-
-// Simple inline styles for the cards
-const cardStyle = (count) => ({
-    padding: '15px',
-    backgroundColor: '#fff',
-    borderRadius: '6px',
-    boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-    borderLeft: `5px solid ${count >= 10 ? '#e74c3c' : '#2ecc71'}`
-});
-
-const progressContainer = {
-    height: '8px',
-    backgroundColor: '#eee',
-    borderRadius: '4px',
-    marginTop: '10px',
-    overflow: 'hidden'
-};
-
-const progressFill = (count) => ({
-    height: '100%',
-    width: `${Math.min((count / 10) * 100, 100)}%`,
-    backgroundColor: count >= 10 ? '#e74c3c' : '#2ecc71',
-    transition: 'width 0.5s ease-in-out'
-});
 
 export default AgentWorkload;

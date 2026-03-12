@@ -2,36 +2,35 @@ import React from 'react';
 
 function TopAgents({ agents }) {
   return (
-    <div style={{
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      padding: '20px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-    }}>
-      <h3 style={{ margin: '0 0 15px 0', color: '#333' }}>Top Performing Agents</h3>
-      <table style={{ width: '100%', borderCollapse: 'collapse' }}>
+    <div className="bg-white rounded-lg p-5 shadow-md">
+      <h3 className="mb-4 text-gray-800 text-lg font-semibold">Top Performing Agents</h3>
+      <table className="w-full border-collapse">
         <thead>
-          <tr style={{ borderBottom: '2px solid #eee' }}>
-            <th style={{ textAlign: 'left', padding: '8px' }}>Agent</th>
-            <th style={{ textAlign: 'right', padding: '8px' }}>Leads</th>
-            <th style={{ textAlign: 'right', padding: '8px' }}>Converted</th>
-            <th style={{ textAlign: 'right', padding: '8px' }}>Revenue</th>
+          <tr className="border-b-2 border-gray-200">
+            <th className="text-left px-2 py-2">Agent</th>
+            <th className="text-right px-2 py-2">Leads</th>
+            <th className="text-right px-2 py-2">Converted</th>
+            <th className="text-right px-2 py-2">Revenue</th>
           </tr>
         </thead>
         <tbody>
-          {(agents) ? agents.map((agent, index) => (
-            <tr key={index} style={{ borderBottom: '1px solid #eee' }}>
-              <td style={{ padding: '8px' }}>{agent.agent_name}</td>
-              <td style={{ textAlign: 'right', padding: '8px' }}>{agent.total_leads}</td>
-              <td style={{ textAlign: 'right', padding: '8px' }}>{agent.converted}</td>
-              <td style={{ textAlign: 'right', padding: '8px' }}>
-                ${Number(agent.revenue).toFixed(2)}
+          {agents && agents.length > 0 ? (
+            agents.map((agent, index) => (
+              <tr key={index} className="border-b border-gray-200">
+                <td className="px-2 py-2">{agent.agent_name}</td>
+                <td className="text-right px-2 py-2">{agent.total_leads}</td>
+                <td className="text-right px-2 py-2">{agent.converted}</td>
+                <td className="text-right px-2 py-2">
+                  ${Number(agent.revenue).toFixed(2)}
+                </td>
+              </tr>
+            ))
+          ) : (
+            <tr>
+              <td colSpan="4" className="text-gray-500 text-center py-4">
+                No data available
               </td>
             </tr>
-          )) : (
-            <div>
-              <p style={{ textAlign: 'start', padding: '20px', color: '#777', width: '100%' }}>No data available</p>
-            </div>
           )}
         </tbody>
       </table>

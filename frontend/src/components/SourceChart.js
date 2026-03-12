@@ -40,12 +40,7 @@ function SourceChart({ data }) {
   };
 
   return (
-    <div style={{
-      backgroundColor: 'white',
-      borderRadius: '8px',
-      padding: '20px',
-      boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-    }}>
+    <div className="bg-white rounded-lg p-5 shadow-md">
       <Bar data={chartData} options={options} />
     </div>
   );

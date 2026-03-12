@@ -12,8 +12,6 @@ function AgentManagement() {
 
     return (
         <div style={{ maxWidth: '1200px', margin: '0 auto' }}>
-            <h1 style={{ color: '#333' }}>Lead Assignment Management</h1>
-            <hr />
             <AgentWorkload onSelectAgent={handleSelectAgent} />
         </div>
     );
